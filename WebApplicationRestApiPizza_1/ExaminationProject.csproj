@@ -411,8 +411,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Exam\Corriger.cshtml" />
     <Content Include="Views\Exam\Result.cshtml" />
-    <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\Listing.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

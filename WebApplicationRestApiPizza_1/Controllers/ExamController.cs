@@ -16,37 +16,14 @@ namespace WebApplicationRestApiPizza_1.Controllers
     public class ExamController : Controller
     {
 
-        // GET: Exam
-        public ActionResult Listing()
+        // GET: Exam/Listing/matiere
+        public ActionResult Listing2(String matiere)
         {
-            var id = HttpContext.Session["id"];
-
+            /*
             var client = new HttpClient();
-            var url = "https://qcmapi.herokuapp.com/listExams/"+id;
-            var response = client.GetAsync(url).Result;
-
-            var retour = response.Content.ReadAsStringAsync().Result;
-
-
-            JObject json = JObject.Parse(retour);
-            var dataEpreuves = json["epreuves"];
-
-
-
-            ViewBag.epreuves = dataEpreuves;
-        
-
-           
-
-            return View();
-
-        }
-        // GET: Exam
-        public ActionResult Index(string matiere)
-        {
-            var client = new HttpClient();
-            //var url = "https://qcmapi.herokuapp.com/questionsExam/"+matiere+"20";
-            var url = "https://qcmapi.herokuapp.com/questionsExam/D51.1/20";
+            var mat = matiere.Replace("_", ".");
+           var url = "https://qcmapi.herokuapp.com/questionsExam/"+mat+"/20";
+            //var url = "https://qcmapi.herokuapp.com/questionsExam/D51.1/20";
             var response = client.GetAsync(url).Result;
 
             var retour = response.Content.ReadAsStringAsync().Result;
@@ -58,6 +35,30 @@ namespace WebApplicationRestApiPizza_1.Controllers
 
 
             ViewBag.dataQuestions = dataQuestions;
+            */
+            ViewBag.matiere = matiere;
+            return View();
+
+        }
+        // GET: Exam
+        public ActionResult Index()
+        {
+            var id = HttpContext.Session["id"];
+
+            var client = new HttpClient();
+            var url = "https://qcmapi.herokuapp.com/listExams/" + id;
+            var response = client.GetAsync(url).Result;
+
+            var retour = response.Content.ReadAsStringAsync().Result;
+
+
+            JObject json = JObject.Parse(retour);
+            var dataEpreuves = json["epreuves"];
+
+
+
+            ViewBag.epreuves = dataEpreuves;
+            
             return View();
 
         }
@@ -65,8 +66,24 @@ namespace WebApplicationRestApiPizza_1.Controllers
 
         
         // GET: Client/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Listing(string id)
         {
+            var client = new HttpClient();
+            var mat = id.Replace("_", ".");
+            var url = "https://qcmapi.herokuapp.com/questionsExam/" + mat + "/20";
+            //var url = "https://qcmapi.herokuapp.com/questionsExam/D51.1/20";
+            var response = client.GetAsync(url).Result;
+
+            var retour = response.Content.ReadAsStringAsync().Result;
+
+
+            JObject json = JObject.Parse(retour);
+            var dataQuestions = json["questions"];
+
+
+
+            ViewBag.dataQuestions = dataQuestions;
+            
             return View();
         }
 
