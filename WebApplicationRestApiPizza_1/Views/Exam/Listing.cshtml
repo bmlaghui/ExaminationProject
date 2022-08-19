@@ -1,0 +1,45 @@
+﻿<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">ITIC PARIS</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <span class="nav-link" href="#">Bienvenue  @HttpContext.Current.Session["nom"].ToString() @HttpContext.Current.Session["prenom"].ToString(),</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<main role="main" class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+        <div class="lh-100">
+            <h6 class="mb-0 text-white lh-100">Bootstrap</h6>
+            <small>Since 2011</small>
+        </div>
+    </div>
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h3 class="border-bottom border-gray pb-2 mb-0">Epreuves à passer</h3>
+        <div class="media text-muted pt-3">
+            @foreach (var item in ViewBag.epreuves)
+            {
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong class="text-gray-dark">@item.matiere</strong>
+                        <a href="/Exam/@item.matiere" class="btn btn-light">Passer l'épreuve</a>
+                    </div>
+                    <span class="d-block">@item.type</span>
+                </div>
+            }
+            </div>
+        
+     
+    </div>
+
+
+
+</main>

@@ -1,0 +1,66 @@
+﻿<div class="container mt-5">
+    <div class="card">
+        <div class="d-flex justify-content-between p-3">
+            <div>
+                <img style="margin: 20% 20% 20% 20%;" src="assets/quiz.png" alt="" width="70" height="35" class="d-inline-block align-text-top">
+            </div>
+            <div class="quiz-header">
+                <h4 style="font-family: Calibri"><strong>QUIZ</strong> en D51.1 <br />  Classe: M2ITIC <br /></h4>
+                <span style="font-style: italic"> Bienvenue  @HttpContext.Current.Session["nom"].ToString() @HttpContext.Current.Session["prenom"].ToString(),</span>
+            </div>
+        </div>
+        
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+                    <h5>0 Points</h5>
+                </div>
+                <div class="question-remain">
+                    <span style="font-style: italic">Question 1 sur 10</span>
+                </div>
+                <div class="timer">
+                    <h5><span style="font-weight: bold" id="timer"></span> sec 🕐</h5>
+                    <script>
+        const departMinutes = 20
+        let temps = departMinutes * 60
+
+        const timerElement = document.getElementById("timer")
+
+        setInterval(() => {
+            let minutes = parseInt(temps / 60, 10)
+            let secondes = parseInt(temps % 60, 10)
+
+            minutes = minutes < 10 ? "0" + minutes : minutes
+            secondes = secondes < 10 ? "0" + secondes : secondes
+
+            timerElement.innerText = `${minutes}:${secondes}`
+            temps = temps <= 0 ? 0 : temps - 1
+        }, 1000)
+
+        //Si le temps est écoulé on appuie sur le bouton
+                    </script>
+                </div>
+            </div>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped" role="progressbar" style="width:50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="question">
+                <div class="card">
+                    <h3>Question</h3>
+                </div>
+            </div>
+            <div class="options">
+                <ol >
+                    <li>
+                        <div  class="card">
+                           rep 1
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn" (click)="previousQuestion()" [disabled]="currentQuestion===0"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i> </button>
+                <button class="btn" (click)="resetQuiz()"><i class="fa text-primary fa-refresh fa-3x" aria-hidden="true"></i> </button>
+                <button class="btn" (click)="nextQuestion()" [disabled]="currentQuestion===questionList.length-1"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i> </button>
+            </div>
+        
+</div>
