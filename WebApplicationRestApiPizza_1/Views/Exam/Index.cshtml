@@ -31,7 +31,7 @@
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <strong class="text-gray-dark">@item.matiere</strong>
-                        <a href="/Exam/Listing/@item.matiere.ToString().Replace(".","_")?type=@item.type&classe=@item.classe" class="btn btn-light">Passer l'épreuve</a>
+                        <a href="/Exam/Listing/@item.matiere.ToString().Replace(".","_")?type=@item.type&classe=@item.classe&idnote=@item.idnote" class="btn btn-light">Passer l'épreuve</a>
                     </div>
                     <span class="d-block">@item.type</span>
                 </div>

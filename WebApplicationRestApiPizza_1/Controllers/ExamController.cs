@@ -55,8 +55,6 @@ namespace WebApplicationRestApiPizza_1.Controllers
             JObject json = JObject.Parse(retour);
             var dataEpreuves = json["epreuves"];
 
-
-
             ViewBag.epreuves = dataEpreuves;
             
             return View();
@@ -80,7 +78,14 @@ namespace WebApplicationRestApiPizza_1.Controllers
             JObject json = JObject.Parse(retour);
             var dataQuestions = json["questions"];
 
+            string type = Request.QueryString["type"];
+            string classe = Request.QueryString["classe"];
+            string idnote = Request.QueryString["idnote"];
 
+            ViewBag.type = type;
+            ViewBag.classe = classe;
+            ViewBag.idnote = idnote;
+            ViewBag.matiere = mat;
 
             ViewBag.dataQuestions = dataQuestions;
             
@@ -103,7 +108,7 @@ namespace WebApplicationRestApiPizza_1.Controllers
 
             string[] keys = Request.Form.AllKeys;
             var client = new HttpClient();
-            for (int i = 0; i < keys.Length; i++)
+            for (int i = 0; i < keys.Length-1; i++)
             {
                
                 var url = "https://qcmapi.herokuapp.com/correction/D51.1/" + keys[i];
@@ -118,17 +123,18 @@ namespace WebApplicationRestApiPizza_1.Controllers
 
                // Response.Write(keys[i] + ": " + Request.Form[keys[i]] + "<br>");
             }
-            var cl = new MongoClient("mongodb://localhost:27017");
-            var database = cl.GetDatabase("QMQUIZ");
-            //var collection = database.GetCollection<Leader>("leaders");
-            var collection = database.GetCollection<BsonDocument>("user");
-            var filter = new BsonDocument("_id", Session["id"].ToString());
-            var update = Builders<BsonDocument>.Update.Set("notes", "["+note.ToString()+"]");
 
-            var result = collection.FindOneAndUpdate(filter, update);
+           
 
-            
-            ViewBag.note = note.ToString();
+
+                ViewBag.note = note.ToString();
+             var indexNote = keys.Length-1;
+            var id = HttpContext.Session["id"];
+            var url2 = "https://qcmapi.herokuapp.com/savenote/"+id+"/"+ Request.Form[keys[indexNote]] + "/"+note;
+            var response2 = client.GetAsync(url2).Result;
+
+            ViewBag.idnote = Request.Form[keys[indexNote]];
+           
             //Session.Abandon();
             return View("Result");
         }

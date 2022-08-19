@@ -28,7 +28,7 @@
                     <img src="../images/itic-logo.png" alt="" width="70" height="70" class="d-inline-block align-text-top">
                 </div>
                 <div class="quiz-header">
-                    <h4 style="font-family: Calibri"><strong>Contrôle Continu</strong> en D51.1 <br />  Classe: M2ITIC <br /></h4>
+                    <h4 style="font-family: Calibri"><strong>@ViewBag.type</strong> en @ViewBag.matiere <br />  Classe: @ViewBag.classe <br /></h4>
                     <span style="font-style: italic"> Bienvenue  @HttpContext.Current.Session["nom"].ToString() @HttpContext.Current.Session["prenom"].ToString(),</span>
                 </div>
             </div>
@@ -125,6 +125,7 @@
                     }
 
                     <input type="submit" class="btn btn-primary" value="Envoyer mes réponses" id="btnOK" />
+                    <input type="hidden" name="idnote" class="btn btn-primary" value="@ViewBag.idnote" id="btnOK" />
                 </form>
             </div>
         </div>
